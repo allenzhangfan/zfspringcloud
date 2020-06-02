@@ -1,0 +1,10 @@
+ceph:
+  config:
+    gateway: ylcloud.tpddns.cn:7480
+    accessKey: 08V69T1IH118ZOS26L87
+    secretKey: 3CmcW5EUhOizPUSh2zFQM7EadVlfVwmmRdGInwsQ
+  face-bucket-name: face
+  body-bucket-name: body
+  monitor-bucket-name: monitor
+  appVersion-bucket-name: appversion
+  sys-avatar-bucket-name: sysavatar

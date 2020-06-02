@@ -6,7 +6,6 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="zfspringcloud" />
         <module name="eureka-server-8760" />
         <module name="eureka-client-8762" />
         <module name="eureka-server-8761" />

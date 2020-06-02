@@ -1,0 +1,14 @@
+
+server:
+  port: 8770
+
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/xulijun137/spring-cloud-config.git
+          default-label: master
+          search-paths: config1

@@ -1,0 +1,64 @@
+server:
+  port: 9009
+
+spring:
+  application:
+    name: resource-api
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    default-property-inclusion: NON_NULL
+
+token:
+  time: 28800
+  app-time: 2592000
+
+kafka:
+  consumer:
+    zookeeper:
+      connect: 172.16.0.27:2181,172.16.0.28:2181,172.16.0.29:2181
+    servers: 172.16.0.27:9092,172.16.0.28:9092,172.16.0.29:9092
+    enable:
+      auto:
+        commit: false
+    session:
+      timeout: 12000
+    auto:
+      commit:
+        interval: 100
+      offset:
+        reset: latest
+    group:
+      id: compare-feature-result-0
+    concurrency: 1
+
+    #fetch.min:
+    #fetch.max.wait: 默认500
+    request.timeout: 30000
+    max.poll.interval: 20000
+    #单次poll调用返回的最大消息数,条数据需要在在session.timeout.ms这个时间内处理完
+    max.poll.records: 20
+    #单次获取数据的最大消息数8M broker 配置
+    #max.message.bytes: 8388608
+    #单次获取数据的最大消息数10M max.partition.fetch.bytes 会话6s内处理的最大数据量大于max.message.bytes
+    fetch.max.bytes: 10485760
+    #大小不能超过session.timeout.ms
+    heartbeat.interval: 3000
+    #轮训策略 partition.assignment.strategy: org.apache.kafka.clients.consumer.RoundRobinAssignor
+    #粘性的
+    partition.assignment.strategy: org.apache.kafka.clients.consumer.StickyAssignor
+    #receive.buffer.bytes
+    #send.buffer.bytes
+
+  producer:
+    servers: 172.16.0.27:9092,172.16.0.28:9092,172.16.0.29:9092
+    retries: 99999
+    batch:
+      size: 4096
+    linger: 1
+    buffer:
+      memory: 40960
+    acks: all
+
+
+

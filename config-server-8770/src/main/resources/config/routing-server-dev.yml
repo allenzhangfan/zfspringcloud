@@ -1,0 +1,56 @@
+#实例名
+spring:
+  application:
+    name: routing-server
+#端口号
+server:
+  port: 8001
+
+zuul:
+  ignored-services: "*"
+  routes:
+    #配置系统管理服务
+    sys:
+      path: /system/**
+      serviceId: sys-api
+      name: 系统管理
+    #登录服务
+    login:
+      path: /auth/**
+      serviceId: sys-login
+      name: 登录授权
+    #设备管理
+    device:
+      path: /device/**
+      serviceId: device-api
+      name: 设备管理
+    #人员管理
+    person:
+      path: /person/**
+      serviceId: person-api
+      name: 人脸人体
+    #资源管理
+    resource:
+      path: /resource/**
+      serviceId: resource-api
+      name: 资源管理
+    #布控管理
+    mcl:
+      path: /mcl/**
+      serviceId: monitoring-api
+      name: 布控管理
+    #消息推送服务
+    msgpusher:
+      path: /msgpusher/**
+      serviceId: msg-pusher
+      name: 消息推送
+  # 禁用以下filter
+  # TokenFilter.pre.disable: true
+  UserResourceFilter.pre.disable: true
+  DDOSAttackFilter.pre.disable: true
+
+## 同一个IP和一个接口，1分钟不能访问30次以上
+filter:
+  blackList: 88.88.88.88
+  visitIntervalSeconds: 60
+  visitLimit: 30

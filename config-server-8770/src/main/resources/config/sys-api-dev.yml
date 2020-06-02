@@ -1,0 +1,27 @@
+server:
+  port: 9001
+
+spring:
+  application:
+    name: sys-api
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+#    为空的字段不参加json序列化
+#    default-property-inclusion: NON_NULL
+
+sysApi:
+  organizationCode-Length: 3 #组织机构编码长度
+
+user:
+  reset:
+    password: 888888
+
+
+logging:
+  level:
+    io.swagger.models.parameters.AbstractSerializableParameter: error
+
+
+
+

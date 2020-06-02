@@ -1,0 +1,75 @@
+server:
+  port: 9099
+
+spring:
+  application:
+    name: msg-pusher
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    default-property-inclusion: NON_NULL
+
+tpl:
+  loader-path: /templates
+  suffix: .ftl
+
+# 阿里云短信配置
+sms:
+  domain: dysmsapi.aliyuncs.com
+  method: POST
+  version: 2017-05-25
+  action: SendSms
+  accessKeyId: LTAIv0pGkMZiHHS9
+  accessSecret: criWciB0ftDlj8sHhRtAkUit4qG5Xo
+  debug: false
+
+jiguan:
+  app_key: eb880aa83d90c136cf1336f2
+  master_secret: e7a25872848335a50a82afe4
+
+
+# web网页推送配置
+pcweb:
+  # servlet上下文超时时间
+  waitcontextTimeout: 10000
+  # 消息响应超时时间
+  messageTimeout: 10000
+  # 客户端连接断开超时时间
+  clientDisconnectTimeout: 60000
+
+kafka:
+  consumer:
+    servers: 172.16.0.27:9092,172.16.0.28:9092,172.16.0.29:9092
+    enable:
+      auto:
+        commit: false
+    session:
+      timeout: 6000
+    auto:
+      commit:
+        interval: 100
+      offset:
+        reset: latest
+    topic: test
+    group:
+      id: test-0
+    concurrency: 2
+
+    #fetch.max.wait: 默认500
+    request.timeout: 30000
+    max.poll.interval: 20000
+    #单次poll调用返回的最大消息数,条数据需要在在session.timeout.ms这个时间内处理完
+    max.poll.records: 100
+    #单次获取数据的最大消息数8M broker 配置
+    #max.message.bytes: 8388608
+    #单次获取数据的最大消息数10M max.partition.fetch.bytes 会话6s内处理的最大数据量大于max.message.bytes
+    fetch.max.bytes: 10485760
+    #大小不能超过session.timeout.ms
+    heartbeat.interval: 2000
+    #轮训策略 partition.assignment.strategy: org.apache.kafka.clients.consumer.RoundRobinAssignor
+    #粘性的
+    partition.assignment.strategy: org.apache.kafka.clients.consumer.StickyAssignor
+    #receive.buffer.bytes
+    #send.buffer.bytes
+
+

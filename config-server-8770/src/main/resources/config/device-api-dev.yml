@@ -1,0 +1,108 @@
+server:
+  port: 9003
+
+spring:
+  application:
+    name: device-api
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+#    为空的字段不参加json序列化
+#    default-property-inclusion: NON_NULL
+
+
+#华为VCN配置
+huaWei:
+  #rest服务地址，结尾不要带有'/'
+  restfulServer: https://182.138.104.146:3168
+#  VCN信息 (杭研所)
+#  vcnPort: 9900
+#  vcnPassWord: super@123
+#  vcnIp: 122.224.65.196
+#  vcnUserName: tester
+#  VCN信息 (南昌)
+  vcnPort: 9900
+  vcnPassWord: HuaWei123
+  vcnIp: 183.216.183.67
+  vcnUserName: huawei
+#sdk 版本
+  vcnVersion: eSDK IVS 1.1.RC1.SPC20
+#  sdk log
+  winSdkLogPath: C:\logSdk
+#  SDK路经(win路经)
+  winSdkPath: D:\spc20_esdk\bin\IVS_SDK
+#  SDK路经(linux路经) .需要在linux下配置sdk的环境变量，参考readme的说明
+  linuxSdkPath: IVS_SDK
+#  sdk log
+  linuxSdkLogPath: /opt/huaweiSDK_log
+#  厂商标识(调用监听设备元数据时会用到.)
+  szVendor: HUAWEI
+
+
+
+
+#C++ 设备监听无数据及结构化服务
+basicSer:
+#  算法仓
+  algType: hwivs
+#  盈力云
+  applySessionId: TDFCloud_Session
+# 解析华为的元数据类型: 0--结构化数据+图片，1--结构化数据，2--图片，3--抠图
+  praseDataType: 0
+#  结构化数据推送topic
+  msgTopic: ivs_structure_topic
+  #  C++ 设备监听服务在zookeeper上的路经
+  zookeeperkPath: /basicSer
+#  调用C++服务失败后重试次数
+  retryCount: 3
+#  失败重试间隔  (每7分钟重试一次)
+  retryIntervalTime: 0 0/2 * * * ?
+  # IVS_SDK_LoadRealImageV2(获取实时元数据图片接口V2)  true:开启监听,false:关闭监听
+  enableListenerDeviceMetaData: true
+#  C++回调接口 ,告知设备的执行状态 (post请求 )
+  callExeResultUrl: http://172.16.0.19:9003/remote/callExeResult
+  #批量同步华为设备至系统& 定时抓拍生成直播预览图    间隔 一小时一次
+  syncIntervalTime: 0 0 * * *  ?
+  #批量同步系统设备至redis间隔 半小时一次
+  syncDevInfo2RedisIntervalTime: 0 0/30 * * * ?
+  #批量同步华为设备数据集大小
+  syncPageSize: 1000
+  #设备经经纬度信息
+  deviceCameraInfo: longitude_latitude_key
+  #是否需要映射假相机
+  needMappingFalseDev: true
+
+
+
+#zk服务配置信息(监听C++服务存活状态)
+zookeeper:
+  server: 172.16.0.27:2181,172.16.0.28:2181,172.16.0.29:2181
+  sessionTimeoutMs: 6000
+  connectionTimeoutMs: 6000
+  maxRetries: 3
+  baseSleepTimeMs: 1000
+
+
+
+httpClient:
+  #最大连接数
+  maxTotal: 200
+  #每个路由基础的连接数
+  defaultMaxPerRoute: 20
+  #心跳检测超时时间
+  socketTimeout: 40000
+  #建立连接超时时间
+  connectTimeout: 40000
+  #请求超时时间
+  connectionRequestTimeout: 60000
+
+#图片配置
+imgConfig:
+#设备抓拍图压缩宽高大小
+  snapshotImg:
+    width: 480
+    height: 270
+
+#rtmp服务
+rtmpConfig:
+  rtmpService: http://172.16.0.136:8086/nvr?command=%s&rtspurl=%s

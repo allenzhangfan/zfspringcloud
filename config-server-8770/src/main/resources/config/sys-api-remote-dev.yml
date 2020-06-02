@@ -1,0 +1,18 @@
+server:
+  port: 90011
+
+spring:
+  application:
+    name: sys-api-remote
+
+ribbon.eureka.enable: true
+
+feign:
+  httpclient:
+    enabled: true
+    max-connections: 20
+  client:
+    config:
+      default:
+        connectTimeout: 4000
+        readTimeout: 4000

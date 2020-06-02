@@ -1,0 +1,97 @@
+spring:
+  datasource:
+    primary:
+      name: tdf-master
+      type: com.alibaba.druid.pool.DruidDataSource
+      driverClassName: org.postgresql.Driver
+      url: jdbc:postgresql://172.16.0.31:5432/tdf
+      #url: jdbc:postgresql://172.16.0.27:20004/tdf
+      #url: jdbc:postgresql://172.16.0.225:5432/tdf
+      username: postgres
+      password: postgres
+      # 初始连接数
+      initialSize: 1
+      # 最小连接池数量
+      minIdle: 2
+      # 最大连接池数量
+      maxActive: 10
+      # 配置获取连接等待超时的时间
+      maxWait: 60000
+      # 打开PSCache，并且指定每个连接上PSCache的大小
+      poolPreparedStatements: false
+      maxPoolPreparedStatementPerConnectionSize: 20
+      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      timeBetweenEvictionRunsMillis: 60000
+      # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=2000
+      #合并多个DruidDataSource的监控数据
+      useGlobalDataSourceStat: true
+      filters: stat,wall,log4j
+      validationQuery: select 1
+      testOnBorrow: true
+      testWhileIdle: true
+      testOnReturn: true
+    second:
+      name: tdf-feature
+      type: com.alibaba.druid.pool.DruidDataSource
+      driverClassName: org.postgresql.Driver
+      url: jdbc:postgresql://172.16.0.31:5432/feature
+      #url: jdbc:postgresql://172.16.0.27:20004/feature
+      #url: jdbc:postgresql://172.16.0.225:5432/feature
+      username: postgres
+      password: postgres
+      # 初始连接数
+      initialSize: 1
+      # 最小连接池数量
+      minIdle: 2
+      # 最大连接池数量
+      maxActive: 10
+      # 配置获取连接等待超时的时间
+      maxWait: 60000
+      # 打开PSCache，并且指定每个连接上PSCache的大小
+      poolPreparedStatements: false
+      maxPoolPreparedStatementPerConnectionSize: 20
+      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      timeBetweenEvictionRunsMillis: 60000
+      # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=2000
+      #合并多个DruidDataSource的监控数据
+      useGlobalDataSourceStat: true
+      filters: stat,wall,log4j
+      validationQuery: select 1
+      testOnBorrow: true
+      testWhileIdle: true
+      testOnReturn: true
+
+# MyBatis
+mybatis:
+  # 搜索指定包别名
+  typeAliasesPackage: cn.tdf.**.entity
+  # 配置mapper的扫描，找到所有的mapper.xml映射文件
+  mapperLocations: classpath*:cn/tdf/**/*Mapper.xml
+  # 加载全局的配置文件
+  configLocation: classpath:mybatis/mybatis-config.xml
+
+# PageHelper分页插件
+pagehelper:
+  helperDialect: postgresql
+  reasonable: false
+  supportMethodsArguments: true
+  params: count=countSql
+
+logging:
+  level:
+    MySQL: DEBUG
+
+#swagger的接口是否对外暴露. true：是，false:否
+isShowSwaggerInterface: true
+
+feature:
+  cpath: http://172.16.0.225:8089/ylser/facefeature
+
+server:
+  tomcat:
+    max-http-post-size: -1
+    uri-encoding: UTF-8
+    max-threads: 1000
+    max-connections: 20000

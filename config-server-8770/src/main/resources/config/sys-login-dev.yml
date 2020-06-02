@@ -1,0 +1,22 @@
+server:
+  port: 9002
+
+spring:
+  application:
+    name: sys-login
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    default-property-inclusion: NON_NULL
+
+token:
+  time: 28800
+  app-time: 2592000
+
+# 连续登陆失败5次以上5分钟内禁止登陆
+# 连续登陆失败8次以上账号禁用
+login:
+  failedLimit: 5
+  forbiddenLimit: 8
+  failedIntervalSeconds: 300
+
