@@ -1,0 +1,14 @@
+
+server:
+  port: 8766
+spring:
+  application:
+    name: service-say-hello
+  main:
+    allow-bean-definition-overriding: true #当遇到同样名字的时候，是否允许覆盖注册
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8760/eureka/
+  instance:
+    prefer-ip-address: true

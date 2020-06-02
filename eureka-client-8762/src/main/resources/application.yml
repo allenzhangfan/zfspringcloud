@@ -3,7 +3,7 @@ server:
   port: 8762
 spring:
   application:
-    name: eureka-client-8762
+    name: service-hello
 eureka:
   client:
     serviceUrl:
