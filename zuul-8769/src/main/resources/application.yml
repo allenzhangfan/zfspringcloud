@@ -17,3 +17,6 @@ zuul:
       #服务映射的路径，通过这路径就可以从外部访问你的服务了，目的是为了不爆露你机器的IP，面向服务的路由了，给你选一个可用的出来，
       path: /service-feign/**
       serviceId: service-say-hello
+    service-hello:
+      path: /service-hello/**
+      serviceId: service-hello
